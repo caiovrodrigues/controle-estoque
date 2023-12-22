@@ -2,3 +2,8 @@
 body{
     background-color: #f3f3f3;
 }
+
+.exact_route{
+    background-color: rgba(255,255,255,0.3);
+    border-radius: 10px;
+}

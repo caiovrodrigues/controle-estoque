@@ -11,6 +11,10 @@ const routes: Routes = [
     loadChildren: () => import('./modules/dashboard/dashboard.module').then(module => module.DashboardModule),
     canActivate: [AuthguardService],
     //Lazy loading, faz com que o módulo seja carregado somente quando acionado
+  },
+  { path: 'products',
+    loadChildren: () => import('./modules/products/products.module').then(module => module.ProductsModule),
+    canActivate: [AuthguardService]
   }
 ];
 

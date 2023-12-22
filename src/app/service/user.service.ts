@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Environment } from 'src/environments/environment-prod';
-import { SignUpUserRequest } from '../models/interfaces/SignUpUserRequest';
+import { SignUpUserRequest } from '../models/interfaces/user/SignUpUserRequest';
 import { Observable } from 'rxjs';
-import { SignUpUserResponse } from '../models/interfaces/SignUpUserResponse';
-import { AuthRequest } from '../models/interfaces/AuthRequest';
-import { AuthResponse } from '../models/interfaces/AuthResponse';
+import { SignUpUserResponse } from '../models/interfaces/user/SignUpUserResponse';
+import { AuthRequest } from '../models/interfaces/user/AuthRequest';
+import { AuthResponse } from '../models/interfaces/user/AuthResponse';
 import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({

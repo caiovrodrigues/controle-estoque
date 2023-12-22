@@ -1,0 +1,51 @@
+<p-toolbar styleClass="bg-gray-900 shadow-2" [style]="{ 'border-radius': '10px', 'background-image': 'linear-gradient(to right, var(--bluegray-500), var(--bluegray-800))' }">
+    <div class="p-toolbar-group-start">
+        <p-button
+        label="Dashboard"
+        routerLink="/dashboard"
+        icon="pi pi-home"
+        styleClass="bg-transparent p-button-secondary hover:bg-white-alpha-40"
+        routerLinkActive="exact_route"
+        ></p-button>
+    </div>
+
+    <div class="p-toolbar-group-center">
+        <p-button
+        label="Produtos"
+        routerLink="/products"
+        icon="pi pi-cart-plus"
+        styleClass="bg-transparent p-button-secondary hover:bg-white-alpha-40"
+        routerLinkActive="exact_route"
+        class="mr-3"
+        ></p-button>
+
+        <p-button
+        label="Categorias"
+        routerLink="/categories"
+        icon="pi pi-ticket"
+        styleClass="bg-transparent p-button-secondary hover:bg-white-alpha-40"
+        routerLinkActive="exact_route"
+        class="mr-3"
+        ></p-button>
+
+        <p-button
+        label="Efetuar venda"
+        routerLink="/products"
+        icon="pi pi-credit-card"
+        styleClass="bg-transparent p-button-secondary hover:bg-white-alpha-40"
+        routerLinkActive="exact_route"
+        ></p-button>
+    </div>
+
+    <div class="p-toolbar-group-center">
+        <p-button
+        label="Sair"
+        icon="pi pi-sign-out"
+        routerLink="/products"
+        styleClass="p-button-danger"
+        class="mr-3"
+        (onClick)="logout()"
+        ></p-button>
+    </div>
+    
+</p-toolbar>

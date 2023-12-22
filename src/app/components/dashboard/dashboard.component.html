@@ -1,2 +1,6 @@
-<p>dashboard works!</p>
-<p-toast></p-toast>
+<app-toolbar-navigation></app-toolbar-navigation>
+<div class="max-w-full mt-3">
+    <p-card header="Quantidade em estoque">
+        <p-chart type="bar" [data]="chartData" [options]="chartOptions"></p-chart>
+    </p-card>
+</div>

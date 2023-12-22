@@ -8,6 +8,9 @@ import { RouterModule } from '@angular/router';
 
 import { DASHBOARD_ROUTES } from 'src/app/components/dashboard/dashboard-routing';
 import { ToastModule } from 'primeng/toast';
+import { ChartModule } from 'primeng/chart';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { CardModule } from 'primeng/card';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,11 @@ import { ToastModule } from 'primeng/toast';
     ReactiveFormsModule,
     RouterModule.forChild(DASHBOARD_ROUTES),
     //Prime NG
-    ToastModule
+    ToastModule,
+    ChartModule,
+    CardModule,
+    //Shared
+    SharedModule
   ],
   providers: [CookieService, MessageService]
 })
