@@ -15,9 +15,14 @@ import { RouterModule } from '@angular/router';
 import { PRODUCTS_ROUTING } from './products.routing';
 import { ProductsHomeComponent } from './page/products-home.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ProductsTableComponent } from './products-table/products-table.component';
+
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
-  declarations: [ProductsHomeComponent],
+  declarations: [ProductsHomeComponent, ProductsTableComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -26,15 +31,18 @@ import { SharedModule } from 'src/app/shared/shared.module';
     RouterModule.forChild(PRODUCTS_ROUTING),
     //PrimeNG
     CardModule,
-    ButtonModule,
     TableModule,
+    ButtonModule,
     InputMaskModule,
     InputSwitchModule,
     InputTextModule,
     InputTextareaModule,
+    ConfirmDialogModule,
+    ToastModule,
     //Shared
     SharedModule
   ],
+  providers: [ConfirmationService, MessageService],
   exports: []
 })
 export class ProductsModule { }

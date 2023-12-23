@@ -1,10 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
 import { Subject, takeUntil } from 'rxjs';
+
+import { GetAllProductsResponse } from 'src/app/models/interfaces/products/response/GetAllProductsResponse.';
+
 import { ProductsDataTransferService } from 'src/app/models/interfaces/products/products-data-transfer.service';
 import { ProductsService } from 'src/app/models/interfaces/products/products.service';
-import { GetAllProductsResponse } from 'src/app/models/interfaces/products/response/GetAllProductsResponse.';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { EventAction } from 'src/app/models/interfaces/EventAction';
 
 @Component({
   selector: 'app-products-home',
@@ -12,6 +15,7 @@ import { GetAllProductsResponse } from 'src/app/models/interfaces/products/respo
   styleUrls: ['./products-home.component.css']
 })
 export class ProductsHomeComponent implements OnInit, OnDestroy {
+
   private readonly destroy$ = new Subject<void>();
 
   public productsList!: GetAllProductsResponse[];
@@ -20,6 +24,7 @@ export class ProductsHomeComponent implements OnInit, OnDestroy {
     private productService: ProductsService,
     private productDataTransfer: ProductsDataTransferService,
     private messageService: MessageService,
+    private confirmationService: ConfirmationService,
     private router: Router
   ){}
 
@@ -55,6 +60,50 @@ export class ProductsHomeComponent implements OnInit, OnDestroy {
         this.messageService.add({severity: 'error', summary: 'Erro', detail: 'Erro ao buscar produtos'});
       }
     })
+  }
+
+  handlerProductEvent(event: EventAction) {
+    console.log('Evento de handlerProductEvent do componente pai: butões de alterar e adicionar: ', event);
+    
+    
+  }
+
+  handlerDeleteProduct(data: {product_id: string; product_name: string}){
+    console.log(data);
+    
+    this.confirmationService.confirm({
+      header: 'Confirmação de exclusão?',
+      message: `Confirma a exclusão do produto: ${data.product_name}?`,
+      icon: 'pi pi-exclamation-triangle',
+      acceptButtonStyleClass:"p-button-danger p-button-text",
+      rejectButtonStyleClass:"p-button-text p-button-text",
+      acceptLabel:"Sim",
+      rejectLabel:"Não",
+      acceptIcon:"none",
+      rejectIcon:"none",
+
+      accept: () => {
+        this.deleteProduct(data.product_id);
+      },
+      reject: () => {
+      }
+  });
+    
+  }
+
+  deleteProduct(product_id: string): void{
+    this.productService.deleteProduct(product_id)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
+      next: (response) => {
+        console.log(response);
+        this.getApiProductDatas();
+        this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' });
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
   }
 
   ngOnDestroy(): void {

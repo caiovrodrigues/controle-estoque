@@ -1,0 +1,139 @@
+<p-card header="Produtos em estoque" styleClass="mt-3">
+    <p-table
+    [value]="products"
+    #productTable
+    styleClass="p-datatable-striped"
+    [tableStyle]="{'min-width': '50rem'}"
+    [paginator]="true"
+    [rows]="10"
+    [rowHover]="true"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} produtos"
+    [globalFilterFields]="['name', 'amount']"
+    [(selection)]="productSelected"
+    dataKey="id"
+    >
+        <ng-template pTemplate="header">
+            <tr>
+                <td pSortableColumn="name">
+                    <div class="flex justify-content-between align-items-center">
+                        <div>
+                            Nome
+                        </div>
+                        <div class="flex justify-content-between">
+                            <p-sortIcon field="name"></p-sortIcon>
+                            <p-columnFilter
+                            type="text"
+                            field="name"
+                            display="menu"
+                            matchMode="contains"
+                            [showMatchModes]="false"
+                            [showOperator]="false"
+                            [showAddButton]="false"
+                            ></p-columnFilter>
+                        </div>
+                    </div>
+                </td>
+                <td pSortableColumn="amount">
+                    <div class="flex justify-content-between align-items-center">
+                        <div>
+                            Quantidade
+                        </div>
+                        <div class="flex justify-content-between">
+                            <p-sortIcon field="amount"></p-sortIcon>
+                            <p-columnFilter
+                            type="text"
+                            field="amount"
+                            display="menu"
+                            matchMode="contains"
+                            [showMatchModes]="false"
+                            [showOperator]="false"
+                            [showAddButton]="false"
+                            ></p-columnFilter>
+                        </div>
+                    </div>
+                </td>
+                <td pSortableColumn="price">
+                    <div class="flex justify-content-between align-items-center">
+                        <div>
+                            Preço
+                        </div>
+                        <div class="flex justify-content-between">
+                            <p-sortIcon field="price"></p-sortIcon>
+                            <p-columnFilter
+                            type="text"
+                            field="price"
+                            display="menu"
+                            matchMode="contains"
+                            [showMatchModes]="false"
+                            [showOperator]="false"
+                            [showAddButton]="false"
+                            ></p-columnFilter>
+                        </div>
+                    </div>
+                </td>
+                <td pSortableColumn="description">
+                    <div class="flex justify-content-between align-items-center">
+                        <div>
+                            Descrição
+                        </div>
+                        <div class="flex justify-content-between">
+                            <p-sortIcon field="description"></p-sortIcon>
+                            <p-columnFilter
+                            type="text"
+                            field="description"
+                            display="menu"
+                            matchMode="contains"
+                            [showMatchModes]="false"
+                            [showOperator]="false"
+                            [showAddButton]="false"
+                            ></p-columnFilter>
+                        </div>
+                    </div>
+                </td>
+                <td pSortableColumn="category.name">
+                    <div class="flex justify-content-between align-items-center">
+                        <div>
+                            Categoria
+                        </div>
+                        <div class="flex justify-content-between">
+                            <p-sortIcon field="category.name"></p-sortIcon>
+                            <p-columnFilter
+                            type="text"
+                            field="category.name"
+                            display="menu"
+                            matchMode="contains"
+                            [showMatchModes]="false"
+                            [showOperator]="false"
+                            [showAddButton]="false"
+                            ></p-columnFilter>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="flex justify-content-center align-items-center">
+                        <p-button
+                        label="Adicionar"
+                        icon="pi pi-plus"
+                        styleClass="p-button-info"
+                        (onClick)="handlerProductAction(addProductEvent)"
+                        ></p-button>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td> {{ product.name }} </td>
+                <td> {{ product.amount }} </td>
+                <td> {{ product.price | currency: 'BRL' }} </td>
+                <td> {{ product.description }} </td>
+                <td> {{ product.category.name }} </td>
+                <div class="flex justify-content-evenly">
+                    <p-button icon="pi pi-pencil" [rounded]="true" severity="warning" (onClick)="handlerProductAction(editProductEvent, product.id)"></p-button>
+                    <p-button icon="pi pi-trash" [rounded]="true" severity="danger" (onClick)="deleteProduct(product.id, product.name)"></p-button>
+                </div>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-card>
